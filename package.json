@@ -1,9 +1,9 @@
 {
-  "name": "material-kit-react",
+  "name": "prodetect-test",
   "version": "4.0.0",
   "author": "Devias",
   "licence": "MIT",
-  "homepage": "https://devias.io",
+  "homepage": "https://prodetect.co",
   "private": false,
   "scripts": {
     "dev": "next dev",
