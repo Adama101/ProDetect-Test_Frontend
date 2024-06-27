@@ -25,6 +25,7 @@ function noop(): void {
 export interface Customer {
   id: string;
   avatar: string;
+  customerid: string;
   name: string;
   email: string;
   address: { city: string; state: string; country: string; street: string };
@@ -73,11 +74,13 @@ export function CustomersTable({
                   }}
                 />
               </TableCell>
+              <TableCell>Customer ID</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>Location</TableCell>
+              <TableCell>Country</TableCell>
               <TableCell>Phone</TableCell>
-              <TableCell>Signed Up</TableCell>
+              <TableCell>DoB</TableCell>
+              <TableCell>Risk Score</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

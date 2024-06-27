@@ -3,7 +3,6 @@ import RouterLink from 'next/link';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
 import { paths } from '@/paths';
 import { DynamicLogo } from '@/components/core/logo';
 
@@ -18,13 +17,18 @@ export function Layout({ children }: LayoutProps): React.JSX.Element {
         display: { xs: 'flex', lg: 'grid' },
         flexDirection: 'column',
         gridTemplateColumns: '1fr 1fr',
-        minHeight: '100%',
+        //minHeight: '100%',
+        justifyContent:'right',
+        alignItems:'right',
+        //height:'100vh',
       }}
     >
-      <Box sx={{ display: 'flex', flex: '1 1 auto', flexDirection: 'column' }}>
+      <Box sx={{ display: 'flex', flex: 'auto', flexDirection: 'column' }}>
         <Box sx={{ p: 3 }}>
           <Box component={RouterLink} href={paths.home} sx={{ display: 'inline-block', fontSize: 0 }}>
-            <DynamicLogo colorDark="light" colorLight="dark" height={32} width={122} />
+            
+            {/* //SignIn Logo */}
+            <DynamicLogo colorDark="light" colorLight="dark" height={100} width={270} />
           </Box>
         </Box>
         <Box sx={{ alignItems: 'center', display: 'flex', flex: '1 1 auto', justifyContent: 'center', p: 3 }}>
@@ -46,11 +50,11 @@ export function Layout({ children }: LayoutProps): React.JSX.Element {
             <Typography color="inherit" sx={{ fontSize: '24px', lineHeight: '32px', textAlign: 'center' }} variant="h1">
               Welcome to{' '}
               <Box component="span" sx={{ color: '#15b79e' }}>
-                Devias Kit
+                ProDetect
               </Box>
             </Typography>
             <Typography align="center" variant="subtitle1">
-              A professional template that comes with ready-to-use MUI components.
+              Reduce False Positives, Prioritize Higher Risks Transactions & Improve Detection Accuracy.
             </Typography>
           </Stack>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -58,7 +62,7 @@ export function Layout({ children }: LayoutProps): React.JSX.Element {
               component="img"
               alt="Widgets"
               src="/assets/auth-widgets.png"
-              sx={{ height: 'auto', width: '100%', maxWidth: '600px' }}
+              sx={{ height: '200%', width: '200%', maxWidth: '900px' }}
             />
           </Box>
         </Stack>
