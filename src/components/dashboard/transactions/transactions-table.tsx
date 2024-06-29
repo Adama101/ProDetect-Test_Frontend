@@ -75,8 +75,8 @@ export function TransactionsTable({
                                 />
                                 {/* Transaction Tables */}
                             </TableCell>
-                            <TableCell>Creation Date</TableCell>
                             <TableCell>Transaction ID</TableCell>
+                            <TableCell>Creation Date</TableCell>
                             <TableCell>Source Amount</TableCell>
                             <TableCell>Source Country</TableCell>
                             <TableCell>Dest. Amount</TableCell>

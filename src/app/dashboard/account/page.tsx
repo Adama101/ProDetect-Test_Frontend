@@ -2,43 +2,28 @@ import * as React from 'react';
 import type { Metadata } from 'next';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
 
 import { config } from '@/config';
-import { CustomersFilters } from '@/components/dashboard/customer/customers-filters';
-import { CustomersTable } from '@/components/dashboard/customer/customers-table';
-import type { Customer } from '@/components/dashboard/customer/customers-table';
+import { AccountDetailsForm } from '@/components/dashboard/account/account-details-form';
+import { AccountInfo } from '@/components/dashboard/account/account-info';
 
-export const metadata = { title: `Customers | Dashboard | ${config.site.name}` } satisfies Metadata;
-
-const customers = [
-  // Customer List
-] satisfies Customer[];
+export const metadata = { title: `Account | Dashboard | ${config.site.name}` } satisfies Metadata;
 
 export default function Page(): React.JSX.Element {
-  const page = 0;
-  const rowsPerPage = 5;
-
-  const paginatedCustomers = applyPagination(customers, page, rowsPerPage);
-
   return (
     <Stack spacing={3}>
-      <Stack direction="row" spacing={3}>
-        <Stack spacing={1} sx={{ flex: '1 1 auto' }}>
-          <Typography variant="h4">Customers</Typography>
-          <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }} />
-        </Stack>
-      </Stack>
-      <CustomersFilters />
-      <CustomersTable
-        count={paginatedCustomers.length}
-        page={page}
-        rows={paginatedCustomers}
-        rowsPerPage={rowsPerPage}
-      />
+      <div>
+        <Typography variant="h4">Account</Typography>
+      </div>
+      <Grid container spacing={3}>
+        <Grid lg={4} md={6} xs={12}>
+          <AccountInfo />
+        </Grid>
+        <Grid lg={8} md={6} xs={12}>
+          <AccountDetailsForm />
+        </Grid>
+      </Grid>
     </Stack>
   );
-}
-
-function applyPagination(rows: Customer[], page: number, rowsPerPage: number): Customer[] {
-  return rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 }

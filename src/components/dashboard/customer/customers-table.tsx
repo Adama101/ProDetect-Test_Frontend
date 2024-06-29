@@ -75,10 +75,10 @@ export function CustomersTable({
                 />
               </TableCell>
               <TableCell>Customer ID</TableCell>
-              <TableCell>Name</TableCell>
+              <TableCell>Customer Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Country</TableCell>
-              <TableCell>Phone</TableCell>
+              <TableCell>Phone No.</TableCell>
               <TableCell>DoB</TableCell>
               <TableCell>Risk Score</TableCell>
             </TableRow>

@@ -15,7 +15,7 @@ export const metadata = { title: `Overview | Dashboard | ${config.site.name}` } 
 
 export default function Page(): React.JSX.Element {
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={2}>
       <Grid lg={3} sm={6} xs={12}>        
 
         {/* Alerts Tile */}
@@ -44,12 +44,6 @@ export default function Page(): React.JSX.Element {
             {
               id: 'PRD-005',
               name: 'Edward Snowden',
-              avatar: 'assets/avatar.png',
-              updatedAt: dayjs().subtract(18, 'minutes').subtract(5, 'hour').toDate(),
-            },
-            {
-              id: 'PRD-005',
-              name: 'Samson Were',
               avatar: 'assets/avatar.png',
               updatedAt: dayjs().subtract(18, 'minutes').subtract(5, 'hour').toDate(),
             },

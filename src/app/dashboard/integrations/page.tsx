@@ -44,7 +44,6 @@ export default function Page(): React.JSX.Element {
         {integrations.map((integration) => (
           <Grid key={integration.id} lg={4} md={6} xs={12}>
             {integration.href ? (
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               <Link href={integration.href} passHref style={{ textDecoration: 'none' }}>
                 <Box component="a" sx={{ textDecoration: 'none' }}>
                   <IntegrationCard integration={integration} />

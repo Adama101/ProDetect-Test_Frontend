@@ -643,12 +643,12 @@ function Documentation() {
                     {tabValue === 2 && (
                         <SyntaxHighlighter language="javascript" style={materialOceanic}>
                             {`{
-    "customer_id": "string",
-    "name": "string",
-    "date_of_birth": "string (ISO 8601)",
-    "address": "string",
-    "phone_number": "string",
-    "email": "string"
+    "customer_id": "CUST12345",
+    "name": "Jonny Boy",
+    "date_of_birth": "1987-01-25T10:00:00Z",
+    "address": "Lagos",
+    "phone_number": "+234 7698414149",
+    "email": "jonny@gmail.com"
 }`}
                         </SyntaxHighlighter>
                     )}
@@ -683,7 +683,7 @@ function Documentation() {
     "number": "P1234567",
     "expiry_date": "2030-01-01"
     },
-    "created_at": "2024-06-25T10:00:00Z",
+    "created_at": "2023-01-25T10:00:00Z",
     "updated_at": "2024-06-25T11:00:00Z"
     }
 }`}
@@ -716,8 +716,8 @@ function Documentation() {
                     </Typography>
                     <SyntaxHighlighter language="json" style={materialOceanic}>
                         {`{
-    "date_from": "string (optional, ISO 8601)",
-    "date_to": "string (optional, ISO 8601)",
+    "date_from": "2023-01-25T10:00:00Z",
+    "date_to": "2024-06-25T11:00:00Z",
     "action_type": "string (optional)"
 }`}
                     </SyntaxHighlighter>
@@ -730,11 +730,11 @@ function Documentation() {
                         {`{
     "audit_logs": [
         {
-            "log_id": "string",
-            "user_id": "string",
-            "action_type": "string",
-            "description": "string",
-            "created_at": "string (ISO 8601)"
+            "log_id": "AL04198",
+            "user_id": "CUT09135",
+            "action_type": "Fither Investigation",
+            "description": "Suspecious Alert",
+            "created_at": "2024-06-25T11:00:00Z"
         }
     ]
 }`}
