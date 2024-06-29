@@ -53,8 +53,8 @@ export function SideNav(): React.JSX.Element {
         <Box component={RouterLink} href={paths.home} sx={{ display: 'inline-flex' }}>
           <DashboardLogo color="dark" height={80} width={150} />
         </Box>
-        
-          
+
+
       </Stack>
       <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
       <Box component="nav" sx={{ flex: '1 1 auto', p: '15px' }}>
@@ -83,8 +83,7 @@ export function SideNav(): React.JSX.Element {
           sx={{ mt: 2 }}
           target="_blank"
           variant="contained"
-        >
-        </Button>
+        />
       </Stack>
     </Box>
   );
@@ -119,11 +118,11 @@ function NavItem({ disabled, external, href, icon, matcher, pathname, title }: N
       <Box
         {...(href
           ? {
-              component: external ? 'a' : RouterLink,
-              href,
-              target: external ? '_blank' : undefined,
-              rel: external ? 'noreferrer' : undefined,
-            }
+            component: external ? 'a' : RouterLink,
+            href,
+            target: external ? '_blank' : undefined,
+            rel: external ? 'noreferrer' : undefined,
+          }
           : { role: 'button' })}
         sx={{
           alignItems: 'center',

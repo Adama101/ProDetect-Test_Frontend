@@ -1,3 +1,4 @@
+/* eslint-disable eslint-comments/require-description */
 import * as React from 'react';
 import type { Metadata } from 'next';
 import Box from '@mui/material/Box';
@@ -35,8 +36,7 @@ export default function Page(): React.JSX.Element {
       <Stack direction="row" spacing={3}>
         <Stack spacing={1} sx={{ flex: '1 1 auto' }}>
           <Typography variant="h4">Integrations</Typography>
-          <Stack sx={{ alignItems: 'center' }} direction="row" spacing={1}>
-          </Stack>
+          <Stack sx={{ alignItems: 'center' }} direction="row" spacing={1} />
         </Stack>
       </Stack>
       <IntegrationsFilters />
@@ -44,6 +44,7 @@ export default function Page(): React.JSX.Element {
         {integrations.map((integration) => (
           <Grid key={integration.id} lg={4} md={6} xs={12}>
             {integration.href ? (
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
               <Link href={integration.href} passHref style={{ textDecoration: 'none' }}>
                 <Box component="a" sx={{ textDecoration: 'none' }}>
                   <IntegrationCard integration={integration} />
@@ -55,8 +56,7 @@ export default function Page(): React.JSX.Element {
           </Grid>
         ))}
       </Grid>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }} />
     </Stack>
   );
 }

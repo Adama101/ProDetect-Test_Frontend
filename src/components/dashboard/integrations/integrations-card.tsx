@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 export interface Integration {
-  href: any;
+  href: unknown;
   id: string;
   title: string;
   description: string;
@@ -39,8 +39,7 @@ export function IntegrationCard({ integration }: IntegrationCardProps): React.JS
       </CardContent>
       <Divider />
       <Stack direction="row" spacing={2} sx={{ alignItems: 'center', justifyContent: 'space-between', p: 2 }}>
-        <Stack sx={{ alignItems: 'center' }} direction="row" spacing={1}>
-        </Stack>
+        <Stack sx={{ alignItems: 'center' }} direction="row" spacing={1} />
       </Stack>
     </Card>
   );

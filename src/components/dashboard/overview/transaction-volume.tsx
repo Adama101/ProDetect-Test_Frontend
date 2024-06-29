@@ -38,9 +38,7 @@ export function TransactionVolume({ chartSeries, sx }: TransactionVolumeProps): 
             </CardContent>
             <Divider />
             <CardActions sx={{ justifyContent: 'flex-end' }}>
-                <Button color="inherit" endIcon={<ArrowRightIcon fontSize="var(--icon-fontSize-md)" />} size="small">
-
-                </Button>
+                <Button color="inherit" endIcon={<ArrowRightIcon fontSize="var(--icon-fontSize-md)" />} size="small" />
             </CardActions>
         </Card>
     );

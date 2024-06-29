@@ -1,5 +1,4 @@
 import React from 'react';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -14,10 +13,6 @@ export interface RiskyCustomers {
     id: string;
     name: string;
     updatedAt: Date;
-}
-
-export interface RiskyCustomers {
-    RiskyCustomers?: RiskyCustomers[];
     sx?: SxProps;
 }
 

@@ -21,17 +21,18 @@ const statusMap = {
     high_risk: { label: 'High Risk', color: 'error' },
 } as const;
 
-export interface allalerts {
+export interface AllAlerts {
     id: string;
     customer: { name: string };
     amount: number;
     status: 'flagged' | 'low_risk' | 'high_risk';
     createdAt: Date;
     riskscore: number;
+    sx?: SxProps;
 }
 
 export interface LatestAlertsProps {
-    alert?: allalerts[];
+    alert?: AllAlerts[];
     sx?: SxProps;
 }
 

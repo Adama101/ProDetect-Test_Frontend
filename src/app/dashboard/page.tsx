@@ -4,12 +4,12 @@ import Grid from '@mui/material/Unstable_Grid2';
 import dayjs from 'dayjs';
 
 import { config } from '@/config';
-import { FalsePositives } from '@/components/dashboard/overview/false_positives';
+import { FalsePositives } from '@/components/dashboard/overview/false-positives';
 import { Alerts } from '@/components/dashboard/overview/alerts';
-import { AverageDetectionTime } from '@/components/dashboard/overview/average_detection_time';
-import { LatestAlerts } from '@/components/dashboard/overview/all_alerts';
-import { FlaggedCustomer } from '@/components/dashboard/overview/flagged_customers';
-import { ConfirmedFraudCases } from '@/components/dashboard/overview/confirmed_fraud_cases';
+import { AverageDetectionTime } from '@/components/dashboard/overview/average-detection-time';
+import { LatestAlerts } from '@/components/dashboard/overview/all-alerts';
+import { FlaggedCustomer } from '@/components/dashboard/overview/flagged-customers';
+import { ConfirmedFraudCases } from '@/components/dashboard/overview/confirmed-fraud-cases';
 
 export const metadata = { title: `Overview | Dashboard | ${config.site.name}` } satisfies Metadata;
 
