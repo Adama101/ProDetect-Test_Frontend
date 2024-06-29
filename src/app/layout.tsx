@@ -2,6 +2,7 @@ import * as React from 'react';
 import type { Viewport } from 'next';
 
 import '@/styles/global.css';
+import { Analytics } from '@vercel/analytics/react';
 
 import { UserProvider } from '@/contexts/user-context';
 import { LocalizationProvider } from '@/components/core/localization-provider';
@@ -20,6 +21,7 @@ export default function Layout({ children }: LayoutProps): React.JSX.Element {
         <LocalizationProvider>
           <UserProvider>
             <ThemeProvider>{children}</ThemeProvider>
+            <Analytics />
           </UserProvider>
         </LocalizationProvider>
       </body>
