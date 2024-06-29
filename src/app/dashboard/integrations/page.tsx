@@ -1,4 +1,3 @@
-/* eslint-disable eslint-comments/require-description */
 import * as React from 'react';
 import type { Metadata } from 'next';
 import Box from '@mui/material/Box';
