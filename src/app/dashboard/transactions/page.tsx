@@ -8,11 +8,22 @@ import { config } from '@/config';
 import { TransactionsFilters } from '@/components/dashboard/transactions/transactions-filter';
 import { TransactionsTable } from '@/components/dashboard/transactions/transactions-table';
 import type { Transactions } from '@/components/dashboard/transactions/transactions-table';
+import dayjs from 'dayjs';
 
 export const metadata = { title: `Transactions | Dashboard | ${config.site.name}` } satisfies Metadata;
 
 const transactions = [
-    // Transactions List
+    // Transactions List comes here.......
+    {
+        transactionID: 'USR-010',
+        createdDate: dayjs().subtract(2, 'hours').toDate(),
+        sourceAmount: 2300,
+        sourceCountry: 'United States',
+        destinationAmount: 5000000,
+        destinationCountry: 'Nigeria',
+        riskScore: 54.3
+    },
+
 ] satisfies Transactions[];
 
 export default function Page(): React.JSX.Element {

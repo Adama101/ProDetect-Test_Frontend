@@ -7,18 +7,46 @@ import { config } from '@/config';
 import { CustomersFilters } from '@/components/dashboard/customer/customers-filters';
 import { CustomersTable } from '@/components/dashboard/customer/customers-table';
 import type { Customer } from '@/components/dashboard/customer/customers-table';
+import dayjs from 'dayjs';
 
 export const metadata = { title: `Customers | Dashboard | ${config.site.name}` } satisfies Metadata;
 
 const customers = [
-
-] satisfies Customer[];
+  // Customer List comes here.....
+    {
+      customerID: '8',
+      customerName: 'Emmanuel Terwase',
+      email: 'emmanuel@meltwater.org',
+      country: 'Ghana',
+      phone: '+234 7389252424',
+      dateOfBirth: dayjs().subtract(2, 'hours').toDate(),
+      riskScore: 70
+    },
+    {
+      customerID: 'USR-010',
+      customerName: 'Jude Ukana',
+      email: 'jude@meltwater.org',
+      country: 'Ghana',
+      phone: '+234 37589252424',
+      dateOfBirth: dayjs().subtract(2, 'hours').toDate(),
+      riskScore: 54.3
+    },
+    {
+      customerID: 'USR-010',
+      customerName: 'Ben Twenty',
+      email: 'Ben@meltwater.org',
+      country: 'Ghana',
+      phone: '+234 589252424',
+      dateOfBirth: dayjs().subtract(2, 'hours').toDate(),
+      riskScore: 40.9
+    },
+  ] satisfies Customer[];
 
 export default function Page(): React.JSX.Element {
   const page = 0;
   const rowsPerPage = 5;
 
-  const paginatedCustomers = applyPagination(customers, page, rowsPerPage);
+  const paginatedCustomers = applyPagination(customers, page, rowsPerPage); 
 
   return (
     <Stack spacing={3}>

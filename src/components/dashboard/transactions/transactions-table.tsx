@@ -23,14 +23,13 @@ function noop(): void {
 }
 
 export interface Transactions {
-    id: string;
-    avatar: string;
-    transactionid: string;
-    name: string;
-    email: string;
-    address: { city: string; state: string; country: string; street: string };
-    phone: string;
-    createdAt: Date;
+    transactionID: string;
+    createdDate: Date;
+    sourceAmount: number;
+    sourceCountry: string;
+    destinationAmount: number;
+    destinationCountry: string;
+    riskScore: number;
 }
 
 interface TransactionsTableProps {
@@ -47,7 +46,7 @@ export function TransactionsTable({
     rowsPerPage = 0,
 }: TransactionsTableProps): React.JSX.Element {
     const rowIds = React.useMemo(() => {
-        return rows.map((transaction) => transaction.id);
+        return rows.map((transaction) => transaction.transactionID);
     }, [rows]);
 
     const { selectAll, deselectAll, selectOne, deselectOne, selected } = useSelection(rowIds);
@@ -86,34 +85,33 @@ export function TransactionsTable({
                     </TableHead>
                     <TableBody>
                         {rows.map((row) => {
-                            const isSelected = selected?.has(row.id);
+                            const isSelected = selected?.has(row.transactionID);
 
                             return (
-                                <TableRow hover key={row.id} selected={isSelected}>
+                                <TableRow hover key={row.transactionID} selected={isSelected}>
                                     <TableCell padding="checkbox">
                                         <Checkbox
                                             checked={isSelected}
                                             onChange={(event) => {
                                                 if (event.target.checked) {
-                                                    selectOne(row.id);
+                                                    selectOne(row.transactionID);
                                                 } else {
-                                                    deselectOne(row.id);
+                                                    deselectOne(row.transactionID);
                                                 }
                                             }}
                                         />
                                     </TableCell>
                                     <TableCell>
                                         <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-                                            <Avatar src={row.avatar} />
-                                            <Typography variant="subtitle2">{row.name}</Typography>
+                                            <Typography variant="subtitle2">{row.transactionID}</Typography>
                                         </Stack>
                                     </TableCell>
-                                    <TableCell>{row.email}</TableCell>
-                                    <TableCell>
-                                        {row.address.city}, {row.address.state}, {row.address.country}
-                                    </TableCell>
-                                    <TableCell>{row.phone}</TableCell>
-                                    <TableCell>{dayjs(row.createdAt).format('MMM D, YYYY')}</TableCell>
+                                    <TableCell>{dayjs(row.createdDate).format('MMM D, YYYY')}</TableCell>
+                                    <TableCell>{row.sourceAmount}</TableCell>
+                                    <TableCell>{row.sourceCountry}</TableCell>
+                                    <TableCell>{row.destinationAmount}</TableCell>
+                                    <TableCell>{row.destinationCountry}</TableCell>
+                                    <TableCell>{row.riskScore}</TableCell>
                                 </TableRow>
                             );
                         })}

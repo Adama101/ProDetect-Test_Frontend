@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Checkbox from '@mui/material/Checkbox';
@@ -23,14 +22,13 @@ function noop(): void {
 }
 
 export interface Customer {
-  id: string;
-  avatar: string;
-  customerid: string;
-  name: string;
+  customerID: string;
+  customerName: string;
   email: string;
-  address: { city: string; state: string; country: string; street: string };
+  country: string;
   phone: string;
-  createdAt: Date;
+  dateOfBirth: Date;
+  riskScore: number;
 }
 
 interface CustomersTableProps {
@@ -47,7 +45,7 @@ export function CustomersTable({
   rowsPerPage = 0,
 }: CustomersTableProps): React.JSX.Element {
   const rowIds = React.useMemo(() => {
-    return rows.map((customer) => customer.id);
+    return rows.map((customer) => customer.customerID);
   }, [rows]);
 
   const { selectAll, deselectAll, selectOne, deselectOne, selected } = useSelection(rowIds);
@@ -85,34 +83,33 @@ export function CustomersTable({
           </TableHead>
           <TableBody>
             {rows.map((row) => {
-              const isSelected = selected?.has(row.id);
+              const isSelected = selected?.has(row.customerID);
 
               return (
-                <TableRow hover key={row.id} selected={isSelected}>
+                <TableRow hover key={row.customerID} selected={isSelected}>
                   <TableCell padding="checkbox">
                     <Checkbox
                       checked={isSelected}
                       onChange={(event) => {
                         if (event.target.checked) {
-                          selectOne(row.id);
+                          selectOne(row.customerID);
                         } else {
-                          deselectOne(row.id);
+                          deselectOne(row.customerID);
                         }
                       }}
                     />
                   </TableCell>
                   <TableCell>
                     <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-                      <Avatar src={row.avatar} />
-                      <Typography variant="subtitle2">{row.name}</Typography>
+                      <Typography variant="subtitle2">{row.customerID}</Typography>
                     </Stack>
                   </TableCell>
+                  <TableCell>{row.customerName}</TableCell>
                   <TableCell>{row.email}</TableCell>
-                  <TableCell>
-                    {row.address.city}, {row.address.state}, {row.address.country}
-                  </TableCell>
+                  <TableCell>{row.country}</TableCell>
                   <TableCell>{row.phone}</TableCell>
-                  <TableCell>{dayjs(row.createdAt).format('MMM D, YYYY')}</TableCell>
+                  <TableCell>{dayjs(row.dateOfBirth).format('MMM D, YYYY')}</TableCell>
+                  <TableCell>{row.riskScore}</TableCell>
                 </TableRow>
               );
             })}
