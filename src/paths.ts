@@ -10,6 +10,7 @@ export const paths = {
     api: '/dashboard/integrations/api',
     documentation: '/dashboard/integrations/api/documentation',
     settings: '/dashboard/settings',
+    fileUpload: '/dashboard/integrations/api/file-upload'
     //integrations: { integration:'/dashboard/integrations', api:'/dashboard/integrations/api', documentation:'/dashboard/integrations/api/documentation'},
   },
 

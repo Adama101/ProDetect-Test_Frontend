@@ -14,7 +14,7 @@ export const metadata = { title: `Customers | Dashboard | ${config.site.name}` }
 const customers = [
   // Customer List comes here.....
     {
-      customerID: '8',
+      customerID: 'PXD001',
       customerName: 'Emmanuel Terwase',
       email: 'emmanuel@meltwater.org',
       country: 'Ghana',
@@ -32,7 +32,7 @@ const customers = [
       riskScore: 54.3
     },
     {
-      customerID: 'USR-010',
+      customerID: 'FXR-214',
       customerName: 'Ben Twenty',
       email: 'Ben@meltwater.org',
       country: 'Ghana',
