@@ -37,13 +37,14 @@ interface TransactionsTableProps {
     page?: number;
     rows?: Transactions[];
     rowsPerPage?: number;
+    onPageChange?: (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
 }
 
 export function TransactionsTable({
     count = 0,
     rows = [],
     page = 0,
-    rowsPerPage = 0,
+    rowsPerPage = 0
 }: TransactionsTableProps): React.JSX.Element {
     const rowIds = React.useMemo(() => {
         return rows.map((transaction) => transaction.transactionID);
