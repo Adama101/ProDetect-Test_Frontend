@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Checkbox from '@mui/material/Checkbox';
@@ -74,7 +73,7 @@ export function TransactionsTable({
                                         }
                                     }}
                                 />
-                                {/* Transaction Tables */}
+                                {/* Transaction Tables label */}
                             </TableCell>
                             <TableCell>Transaction ID</TableCell>
                             <TableCell>Creation Date</TableCell>
@@ -127,7 +126,7 @@ export function TransactionsTable({
                 onRowsPerPageChange={noop}
                 page={page}
                 rowsPerPage={rowsPerPage}
-                rowsPerPageOptions={[5, 10, 25]}
+                rowsPerPageOptions={[50, 100, 500]}
             />
         </Card>
     );
