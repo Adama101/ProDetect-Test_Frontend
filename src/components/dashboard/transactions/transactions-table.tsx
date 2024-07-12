@@ -23,14 +23,14 @@ function noop(): void {
 }
 
 export interface Transactions {
-    transactionID: string;
-    createdDate: Date;
+    transactionId: string;
+    transactionDate: string;
     sourceAmount: number;
     sourceCountry: string;
-    destinationAmount: number;
-    destinationCountry: string;
-    riskScore: number;
+    descAmount: number;
+    score: number;
 }
+
 
 interface TransactionsTableProps {
     count?: number;
@@ -46,8 +46,9 @@ export function TransactionsTable({
     page = 0,
     rowsPerPage = 0
 }: TransactionsTableProps): React.JSX.Element {
+    console.log('TransactionsTable received rows:', rows);
     const rowIds = React.useMemo(() => {
-        return rows.map((transaction) => transaction.transactionID);
+        return rows.map((transaction) => transaction.transactionId);
     }, [rows]);
 
     const { selectAll, deselectAll, selectOne, deselectOne, selected } = useSelection(rowIds);
@@ -86,34 +87,33 @@ export function TransactionsTable({
                     </TableHead>
                     <TableBody>
                         {rows.map((row) => {
-                            const isSelected = selected?.has(row.transactionID);
+                            const isSelected = selected?.has(row.transactionId);
 
-                            return (
-                                <TableRow hover key={row.transactionID} selected={isSelected}>
-                                    <TableCell padding="checkbox">
-                                        <Checkbox
-                                            checked={isSelected}
-                                            onChange={(event) => {
-                                                if (event.target.checked) {
-                                                    selectOne(row.transactionID);
-                                                } else {
-                                                    deselectOne(row.transactionID);
-                                                }
-                                            }}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-                                            <Typography variant="subtitle2">{row.transactionID}</Typography>
-                                        </Stack>
-                                    </TableCell>
-                                    <TableCell>{dayjs(row.createdDate).format('MMM D, YYYY')}</TableCell>
-                                    <TableCell>{row.sourceAmount}</TableCell>
-                                    <TableCell>{row.sourceCountry}</TableCell>
-                                    <TableCell>{row.destinationAmount}</TableCell>
-                                    <TableCell>{row.destinationCountry}</TableCell>
-                                    <TableCell>{row.riskScore}</TableCell>
-                                </TableRow>
+                            return (<TableRow hover key={row.transactionId} selected={isSelected}>
+                                <TableCell padding="checkbox">
+                                    <Checkbox
+                                        checked={isSelected}
+                                        onChange={(event) => {
+                                            if (event.target.checked) {
+                                                selectOne(row.transactionId);
+                                            } else {
+                                                deselectOne(row.transactionId);
+                                            }
+                                        }}
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
+                                        <Typography variant="subtitle2">{row.transactionId}</Typography>
+                                    </Stack>
+                                </TableCell>
+                                <TableCell>{dayjs(row.transactionDate).format('MMM D, YYYY')}</TableCell>
+                                <TableCell>{row.sourceAmount}</TableCell>
+                                <TableCell>{row.sourceCountry}</TableCell>
+                                <TableCell>{row.descAmount}</TableCell>
+                                <TableCell>N/A</TableCell>
+                                <TableCell>{row.score}</TableCell>
+                            </TableRow>
                             );
                         })}
                     </TableBody>
