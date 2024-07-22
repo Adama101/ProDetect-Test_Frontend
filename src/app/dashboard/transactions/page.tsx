@@ -13,32 +13,39 @@ import type { Transactions } from '@/types';
 export default function Page(): React.JSX.Element {
     const [transactions, setTransactions] = React.useState<Transactions[]>([]);
     const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(50);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState<string | null>(null);
-    const rowsPerPage = 15;
+
+    const getTransactions = React.useCallback(async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            const data = await fetchTransactions();
+            console.log('Fetched and sorted transactions:', data);
+            setTransactions(data);
+        } catch (error) {
+            console.error('Failed to fetch transactions', error);
+            setError('Failed to fetch transactions. Please try again later.');
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
     React.useEffect(() => {
-        const getTransactions = async () => {
-            try {
-                setLoading(true);
-                setError(null);
-                const data = await fetchTransactions();
-                console.log('Setting transactions:', data); // Add this line
-                setTransactions(data);
-            } catch (error) {
-                console.error('Failed to fetch transactions', error);
-                setError('Failed to fetch transactions. Please try again later.');
-            } finally {
-                setLoading(false);
-            }
-        };
         getTransactions();
-    }, []);
-    const handlePageChange = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+        const intervalId = setInterval(getTransactions, 600000); // Automatically Refresh timer
+        return () => clearInterval(intervalId);
+    }, [getTransactions]);
+
+    const handlePageChange = (newPage: number) => {
         setPage(newPage);
     };
 
-    const paginatedTransactions = applyPagination(transactions, page, rowsPerPage);
+    const handleRowsPerPageChange = (newRowsPerPage: number) => {
+        setRowsPerPage(newRowsPerPage);
+        setPage(0);
+    };
 
     if (loading) {
         return <CircularProgress />;
@@ -62,16 +69,13 @@ export default function Page(): React.JSX.Element {
             ) : (
                 <TransactionsTable
                     count={transactions.length}
-                    page={page}
-                    rows={paginatedTransactions}
-                    rowsPerPage={rowsPerPage}
+                    initialPage={page}
+                    initialRowsPerPage={rowsPerPage}
+                    rows={transactions}
                     onPageChange={handlePageChange}
+                    onRowsPerPageChange={handleRowsPerPageChange}
                 />
             )}
         </Stack>
     );
-}
-
-function applyPagination(rows: Transactions[], page: number, rowsPerPage: number): Transactions[] {
-    return rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 }

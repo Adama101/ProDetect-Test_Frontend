@@ -17,10 +17,6 @@ import dayjs from 'dayjs';
 
 import { useSelection } from '@/hooks/use-selection';
 
-function noop(): void {
-    // do nothing
-}
-
 export interface Transactions {
     transactionId: string;
     transactionDate: string;
@@ -30,22 +26,29 @@ export interface Transactions {
     score: number;
 }
 
-
 interface TransactionsTableProps {
     count?: number;
-    page?: number;
+    initialPage?: number;
+    initialRowsPerPage?: number;
     rows?: Transactions[];
-    rowsPerPage?: number;
-    onPageChange?: (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => void;
+    onPageChange?: (newPage: number) => void;
+    onRowsPerPageChange?: (newRowsPerPage: number) => void;
 }
 
 export function TransactionsTable({
     count = 0,
+    initialPage = 0,
+    initialRowsPerPage = 50,
     rows = [],
-    page = 0,
-    rowsPerPage = 0
+    onPageChange,
+    onRowsPerPageChange
 }: TransactionsTableProps): React.JSX.Element {
+    const [page, setPage] = React.useState(initialPage);
+    const [rowsPerPage, setRowsPerPage] = React.useState(initialRowsPerPage);
+
     console.log('TransactionsTable received rows:', rows);
+    console.log('Count:', count, 'Page:', page, 'RowsPerPage:', rowsPerPage);
+
     const rowIds = React.useMemo(() => {
         return rows.map((transaction) => transaction.transactionId);
     }, [rows]);
@@ -54,6 +57,27 @@ export function TransactionsTable({
 
     const selectedSome = (selected?.size ?? 0) > 0 && (selected?.size ?? 0) < rows.length;
     const selectedAll = rows.length > 0 && selected?.size === rows.length;
+
+    const handlePageChange = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+        setPage(newPage);
+        if (onPageChange) {
+            onPageChange(newPage);
+        }
+    };
+
+    const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newRowsPerPage = parseInt(event.target.value, 10);
+        setRowsPerPage(newRowsPerPage);
+        setPage(0);
+        if (onRowsPerPageChange) {
+            onRowsPerPageChange(newRowsPerPage);
+        }
+    };
+
+    const paginatedRows = rows.slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+    );
 
     return (
         <Card>
@@ -73,7 +97,6 @@ export function TransactionsTable({
                                         }
                                     }}
                                 />
-                                {/* Transaction Tables label */}
                             </TableCell>
                             <TableCell>Transaction ID</TableCell>
                             <TableCell>Creation Date</TableCell>
@@ -85,34 +108,35 @@ export function TransactionsTable({
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => {
+                        {paginatedRows.map((row) => {
                             const isSelected = selected?.has(row.transactionId);
 
-                            return (<TableRow hover key={row.transactionId} selected={isSelected}>
-                                <TableCell padding="checkbox">
-                                    <Checkbox
-                                        checked={isSelected}
-                                        onChange={(event) => {
-                                            if (event.target.checked) {
-                                                selectOne(row.transactionId);
-                                            } else {
-                                                deselectOne(row.transactionId);
-                                            }
-                                        }}
-                                    />
-                                </TableCell>
-                                <TableCell>
-                                    <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-                                        <Typography variant="subtitle2">{row.transactionId}</Typography>
-                                    </Stack>
-                                </TableCell>
-                                <TableCell>{dayjs(row.transactionDate).format('MMM D, YYYY')}</TableCell>
-                                <TableCell>{row.sourceAmount}</TableCell>
-                                <TableCell>{row.sourceCountry}</TableCell>
-                                <TableCell>{row.descAmount}</TableCell>
-                                <TableCell>N/A</TableCell>
-                                <TableCell>{row.score}</TableCell>
-                            </TableRow>
+                            return (
+                                <TableRow hover key={row.transactionId} selected={isSelected}>
+                                    <TableCell padding="checkbox">
+                                        <Checkbox
+                                            checked={isSelected}
+                                            onChange={(event) => {
+                                                if (event.target.checked) {
+                                                    selectOne(row.transactionId);
+                                                } else {
+                                                    deselectOne(row.transactionId);
+                                                }
+                                            }}
+                                        />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
+                                            <Typography variant="subtitle2">{row.transactionId}</Typography>
+                                        </Stack>
+                                    </TableCell>
+                                    <TableCell>{dayjs(row.transactionDate).format('MMM D, YYYY HH:mm:ss')}</TableCell>
+                                    <TableCell>{row.sourceAmount}</TableCell>
+                                    <TableCell>{row.sourceCountry}</TableCell>
+                                    <TableCell>{row.descAmount}</TableCell>
+                                    <TableCell>N/A</TableCell>
+                                    <TableCell>{row.score}</TableCell>
+                                </TableRow>
                             );
                         })}
                     </TableBody>
@@ -122,8 +146,8 @@ export function TransactionsTable({
             <TablePagination
                 component="div"
                 count={count}
-                onPageChange={noop}
-                onRowsPerPageChange={noop}
+                onPageChange={handlePageChange}
+                onRowsPerPageChange={handleRowsPerPageChange}
                 page={page}
                 rowsPerPage={rowsPerPage}
                 rowsPerPageOptions={[50, 100, 500]}
