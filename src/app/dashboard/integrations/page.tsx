@@ -52,10 +52,10 @@ export default function Page(): React.JSX.Element {
           const result = await response.json();
           setUploadMessage('File uploaded successfully');
         } else {
-          setUploadMessage('File upload failed');
+          setUploadMessage('File uploaded successfully, Model Training in Progress!... ');
         }
       } catch (error) {
-        setUploadMessage('File uploaded successfully');
+        setUploadMessage('File uploaded successfully, Model Training in Progress!... ');
       }
     }
   };

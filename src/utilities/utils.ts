@@ -3,7 +3,7 @@ import { Transactions } from '@/types';
 export async function fetchTransactions(): Promise<Transactions[]> {
     let allTransactions: Transactions[] = [];
     let page = 1;
-    const limit = 1000; // Adjust based on your API's capabilities
+    const limit = 1000; // Adjust based on API's capabilities
 
     while (true) {
         const response = await fetch(`/api/proxy?page=${page}&limit=${limit}`);

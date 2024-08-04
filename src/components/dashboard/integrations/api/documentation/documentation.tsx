@@ -39,7 +39,7 @@ function Documentation() {
                 The base URL for all API endpoints is:
             </Typography>
             <SyntaxHighlighter language="plaintext" style={materialOceanic}>
-                https://api.prodetect.co/v1
+            https://prodetect-fraudcheck-api.onrender.com
             </SyntaxHighlighter>
 
             <Divider sx={{ my: 2 }} />

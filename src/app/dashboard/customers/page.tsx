@@ -14,27 +14,9 @@ export const metadata = { title: `Customers | Dashboard | ${config.site.name}` }
 const customers = [
   // Customer List comes here.....
     {
-      customerID: 'PXD001',
-      customerName: 'Emmanuel Terwase',
-      email: 'emmanuel@meltwater.org',
-      country: 'Ghana',
-      phone: '+234 7389252424',
-      dateOfBirth: dayjs().subtract(2, 'hours').toDate(),
-      riskScore: 70
-    },
-    {
-      customerID: 'USR-010',
-      customerName: 'Jude Ukana',
-      email: 'jude@meltwater.org',
-      country: 'Ghana',
-      phone: '+234 37589252424',
-      dateOfBirth: dayjs().subtract(2, 'hours').toDate(),
-      riskScore: 54.3
-    },
-    {
       customerID: 'FXR-214',
-      customerName: 'Ben Twenty',
-      email: 'Ben@meltwater.org',
+      customerName: 'Kaba Mohammad',
+      email: 'Kaba123@meltwater.org',
       country: 'Ghana',
       phone: '+234 589252424',
       dateOfBirth: dayjs().subtract(2, 'hours').toDate(),
