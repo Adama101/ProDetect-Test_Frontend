@@ -101,12 +101,11 @@ export function TransactionsTable({
                                 />
                             </TableCell>
                             <TableCell>Transaction ID</TableCell>
+                            <TableCell>Transaction Date</TableCell>
+                            <TableCell>Transaction Type</TableCell>
                             <TableCell>Account Number</TableCell>
                             <TableCell>Transaction Type</TableCell>
-                            <TableCell>Amount</TableCell>
-                            <TableCell>Account Balance</TableCell>
-                            <TableCell>Receiver Name</TableCell>
-                            <TableCell>Transaction Date/Time</TableCell>
+                            <TableCell>Receiving Amount</TableCell>
                             <TableCell>Risk Score</TableCell>
                         </TableRow>
                     </TableHead>

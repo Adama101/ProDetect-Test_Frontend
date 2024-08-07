@@ -8,7 +8,7 @@ export async function fetchTransactions(): Promise<Transactions[]> {
     while (true) {
         const response = await fetch(`/api/proxy?page=${page}&limit=${limit}`);
         if (!response.ok) {
-            throw new Error('Failed to fetch transactions');
+            throw new Error('Check your Internet');
         }
 
         const data: Transactions[] = await response.json();
