@@ -1,12 +1,11 @@
 export interface Transactions {
-    Id: string;
-    customerId: string;
-    accountnumber: number;
+    id: string;
+    customerid: string;
+    accountnumber: string;
     transactiontype: string;
-    amount: number;
-    accountbalance: number;
+    amount: string;
+    accountbalance: string;
     receivername: string;
-    transactiontime: Date;
-    riskscore: number;
-    }
-    
+    transactiontime: string;
+    riskscore: string;
+}

@@ -18,15 +18,15 @@ import dayjs from 'dayjs';
 import { useSelection } from '@/hooks/use-selection';
 
 export interface Transactions {
-    Id: string;
-    customerId: string;
-    accountnumber: number;
+    id: string;
+    customerid: string;
+    accountnumber: string;
     transactiontype: string;
-    amount: number;
-    accountbalance: number;
+    amount: string;
+    accountbalance: string;
     receivername: string;
-    transactiontime: Date;
-    riskscore: number;
+    transactiontime: string;
+    riskscore: string;
 }
 
 interface TransactionsTableProps {
@@ -53,7 +53,7 @@ export function TransactionsTable({
     console.log('Count:', count, 'Page:', page, 'RowsPerPage:', rowsPerPage);
 
     const rowIds = React.useMemo(() => {
-        return rows.map((transaction) => transaction.Id);
+        return rows.map((transaction) => transaction.id);
     }, [rows]);
 
     const { selectAll, deselectAll, selectOne, deselectOne, selected } = useSelection(rowIds);
@@ -113,28 +113,28 @@ export function TransactionsTable({
                     </TableHead>
                     <TableBody>
                         {paginatedRows.map((row) => {
-                            const isSelected = selected?.has(row.Id);
+                            const isSelected = selected?.has(row.id);
 
                             return (
-                                <TableRow hover key={row.Id} selected={isSelected}>
+                                <TableRow hover key={row.id} selected={isSelected}>
                                     <TableCell padding="checkbox">
                                         <Checkbox
                                             checked={isSelected}
                                             onChange={(event) => {
                                                 if (event.target.checked) {
-                                                    selectOne(row.Id);
+                                                    selectOne(row.id);
                                                 } else {
-                                                    deselectOne(row.Id);
+                                                    deselectOne(row.id);
                                                 }
                                             }}
                                         />
                                     </TableCell>
                                     <TableCell>
                                         <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-                                            <Typography variant="subtitle2">{row.Id}</Typography>
+                                            <Typography variant="subtitle2">{row.id}</Typography>
                                         </Stack>
                                     </TableCell>
-                                    <TableCell>{row.customerId}</TableCell>
+                                    <TableCell>{row.customerid}</TableCell>
                                     <TableCell>{dayjs(row.transactiontime).format('MMM D, YYYY HH:mm:ss')}</TableCell>
                                     <TableCell>{row.transactiontype}</TableCell>
                                     <TableCell>{row.accountnumber}</TableCell>
