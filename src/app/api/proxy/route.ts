@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     // Get pagination parameters from the request, if any
     const url = new URL(request.url);
     const page = url.searchParams.get('page') || '1';
-    const limit = url.searchParams.get('limit') || '1000'; // Set a high limit to get all data
+    const limit = url.searchParams.get('limit') || '1000'; // high limit to get all data
 
     try {
         const response = await fetch(`${apiUrl}?page=${page}&limit=${limit}`, {

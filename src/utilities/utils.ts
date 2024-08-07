@@ -27,7 +27,7 @@ export async function fetchTransactions(): Promise<Transactions[]> {
     console.log(`Total transactions fetched: ${allTransactions.length}`);
 
     // Sort transactions by date, latest first
-    allTransactions.sort((a, b) => new Date(b.transactionDate).getTime() - new Date(a.transactionDate).getTime());
+    allTransactions.sort((a, b) => new Date(b.transactiontime).getTime() - new Date(a.transactiontime).getTime());
 
     return allTransactions;
 }

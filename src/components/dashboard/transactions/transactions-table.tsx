@@ -19,11 +19,13 @@ import { useSelection } from '@/hooks/use-selection';
 
 export interface Transactions {
     transactionId: string;
-    transactionDate: string;
-    sourceAmount: number;
-    sourceCountry: string;
-    descAmount: number;
-    score: number;
+    accountnumber: number;
+    transactiontype: string;
+    amount: number;
+    accountbalance: number;
+    receivername: string;
+    transactiontime: Date;
+    riskscore: number;
 }
 
 interface TransactionsTableProps {
@@ -99,11 +101,12 @@ export function TransactionsTable({
                                 />
                             </TableCell>
                             <TableCell>Transaction ID</TableCell>
-                            <TableCell>Creation Date</TableCell>
-                            <TableCell>Source Amount</TableCell>
-                            <TableCell>Source Country</TableCell>
-                            <TableCell>Dest. Amount</TableCell>
-                            <TableCell>Dest. Country</TableCell>
+                            <TableCell>Account Number</TableCell>
+                            <TableCell>Transaction Type</TableCell>
+                            <TableCell>Amount</TableCell>
+                            <TableCell>Account Balance</TableCell>
+                            <TableCell>Receiver Name</TableCell>
+                            <TableCell>Transaction Date/Time</TableCell>
                             <TableCell>Risk Score</TableCell>
                         </TableRow>
                     </TableHead>
@@ -130,12 +133,12 @@ export function TransactionsTable({
                                             <Typography variant="subtitle2">{row.transactionId}</Typography>
                                         </Stack>
                                     </TableCell>
-                                    <TableCell>{dayjs(row.transactionDate).format('MMM D, YYYY HH:mm:ss')}</TableCell>
-                                    <TableCell>{row.sourceAmount}</TableCell>
-                                    <TableCell>{row.sourceCountry}</TableCell>
-                                    <TableCell>{row.descAmount}</TableCell>
-                                    <TableCell>N/A</TableCell>
-                                    <TableCell>{row.score}</TableCell>
+                                    <TableCell>{dayjs(row.transactiontime).format('MMM D, YYYY HH:mm:ss')}</TableCell>
+                                    <TableCell>{row.transactionId}</TableCell>
+                                    <TableCell>{row.accountnumber}</TableCell>
+                                    <TableCell>{row.transactiontype}</TableCell>
+                                    <TableCell>{row.amount}</TableCell>
+                                    <TableCell>{row.riskscore}</TableCell>
                                 </TableRow>
                             );
                         })}

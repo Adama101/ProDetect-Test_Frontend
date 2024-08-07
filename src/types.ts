@@ -1,8 +1,11 @@
 export interface Transactions {
-    transactionId: string;
-    transactionDate: string;
-    sourceAmount: number;
-    sourceCountry: string;
-    descAmount: number;
-    score: number;
-}
+        transactionId: string;
+        accountnumber: number;
+        transactiontype: string;
+        amount: number;
+        accountbalance: number;
+        receivername: string;
+        transactiontime: Date;
+        riskscore: number;
+    }
+    
