@@ -27,12 +27,12 @@ export async function GET(request: Request) {
         }
 
         const data = await response.json();
-        // console.log('Proxy response:', {
-        //     status: response.status,
-        //     headers: Object.fromEntries(response.headers),
-        //     dataLength: Array.isArray(data) ? data.length : 'Not an array',
-        //     data: data
-        // });
+        console.log('Proxy response:', {
+            status: response.status,
+            headers: Object.fromEntries(response.headers),
+            dataLength: Array.isArray(data) ? data.length : 'Not an array',
+            data: data
+        });
 
         return NextResponse.json(data);
     } catch (error) {
