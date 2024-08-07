@@ -136,6 +136,7 @@ export function TransactionsTable({
                                     <TableCell>{row.transactionId}</TableCell>
                                     <TableCell>{row.accountnumber}</TableCell>
                                     <TableCell>{row.transactiontype}</TableCell>
+                                    {/* <TableCell>{row.receivername}</TableCell> */}
                                     <TableCell>{row.amount}</TableCell>
                                     <TableCell>{row.riskscore}</TableCell>
                                 </TableRow>

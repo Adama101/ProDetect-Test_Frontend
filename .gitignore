@@ -14,7 +14,7 @@ out
 .next
 
 # Endpoints
-# /.env.local
+/.env.local
 
 # misc
 .DS_Store
