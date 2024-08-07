@@ -18,7 +18,8 @@ import dayjs from 'dayjs';
 import { useSelection } from '@/hooks/use-selection';
 
 export interface Transactions {
-    transactionId: string;
+    Id: string;
+    customerId: string;
     accountnumber: number;
     transactiontype: string;
     amount: number;
@@ -52,7 +53,7 @@ export function TransactionsTable({
     console.log('Count:', count, 'Page:', page, 'RowsPerPage:', rowsPerPage);
 
     const rowIds = React.useMemo(() => {
-        return rows.map((transaction) => transaction.transactionId);
+        return rows.map((transaction) => transaction.Id);
     }, [rows]);
 
     const { selectAll, deselectAll, selectOne, deselectOne, selected } = useSelection(rowIds);
@@ -101,42 +102,43 @@ export function TransactionsTable({
                                 />
                             </TableCell>
                             <TableCell>Transaction ID</TableCell>
+                            <TableCell>Customer ID</TableCell>
                             <TableCell>Transaction Date</TableCell>
                             <TableCell>Transaction Type</TableCell>
                             <TableCell>Account Number</TableCell>
-                            <TableCell>Transaction Type</TableCell>
-                            <TableCell>Receiving Amount</TableCell>
+                            <TableCell>Receiver Name</TableCell>
+                            <TableCell>Amount</TableCell>
                             <TableCell>Risk Score</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {paginatedRows.map((row) => {
-                            const isSelected = selected?.has(row.transactionId);
+                            const isSelected = selected?.has(row.Id);
 
                             return (
-                                <TableRow hover key={row.transactionId} selected={isSelected}>
+                                <TableRow hover key={row.Id} selected={isSelected}>
                                     <TableCell padding="checkbox">
                                         <Checkbox
                                             checked={isSelected}
                                             onChange={(event) => {
                                                 if (event.target.checked) {
-                                                    selectOne(row.transactionId);
+                                                    selectOne(row.Id);
                                                 } else {
-                                                    deselectOne(row.transactionId);
+                                                    deselectOne(row.Id);
                                                 }
                                             }}
                                         />
                                     </TableCell>
                                     <TableCell>
                                         <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-                                            <Typography variant="subtitle2">{row.transactionId}</Typography>
+                                            <Typography variant="subtitle2">{row.Id}</Typography>
                                         </Stack>
                                     </TableCell>
+                                    <TableCell>{row.customerId}</TableCell>
                                     <TableCell>{dayjs(row.transactiontime).format('MMM D, YYYY HH:mm:ss')}</TableCell>
-                                    <TableCell>{row.transactionId}</TableCell>
-                                    <TableCell>{row.accountnumber}</TableCell>
                                     <TableCell>{row.transactiontype}</TableCell>
-                                    {/* <TableCell>{row.receivername}</TableCell> */}
+                                    <TableCell>{row.accountnumber}</TableCell>
+                                    <TableCell>{row.receivername}</TableCell>
                                     <TableCell>{row.amount}</TableCell>
                                     <TableCell>{row.riskscore}</TableCell>
                                 </TableRow>
