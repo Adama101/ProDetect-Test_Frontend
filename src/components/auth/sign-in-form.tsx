@@ -20,9 +20,11 @@ import Checkbox from '@mui/material/Checkbox';
 import { paths } from '@/paths';
 import { useUser } from '@/hooks/use-user';
 import { Box, FormControlLabel } from '@mui/material';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { signIn } from 'next-auth/react';
 
 const schema = zod.object({
-  email: zod.string().min(1, { message: 'Email is required' }).email(),
+  email: zod.string().min(1, { message: 'Email is required' }).email('Invalid email address'),
   password: zod.string().min(1, { message: 'Password is required' }),
 });
 
@@ -44,39 +46,61 @@ export function SignInForm(): React.JSX.Element {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<Values>({});
+  } = useForm<Values>({
+    defaultValues,
+    resolver: zodResolver(schema),
+  });
 
-  const onSubmit = React.useCallback(
-    async (values: Values): Promise<void> => {
-      // Navigate to the dashboard route directly with out Authentication for Now
-      router.push('/dashboard');
-    },
-    [router]
-  );
+  const onSubmit = async (values: Values) => {
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+      });
+
+      if (result?.error) {
+        setError('root', {
+          type: 'manual',
+          message: 'Invalid email or password',
+        });
+      } else {
+        router.push(''); // Redirect to dashboard or home page after successful sign-in
+      }
+    } catch (error) {
+      console.error('Sign-in error:', error);
+      setError('root', {
+        type: 'manual',
+        message: 'An error occurred during sign-in',
+      });
+    }
+  };
 
   return (
     <Stack spacing={4}>
       <Stack spacing={1}>
         <Typography variant="h5">Log In</Typography>
       </Stack>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Stack spacing={2}>
           <Controller
             control={control}
             name="email"
+            rules={{ required: 'Email is required' }}
             render={({ field }) => (
-              <FormControl error={Boolean(errors.email)}>
+              <FormControl error={Boolean(errors.email)} required>
                 <InputLabel>Email address</InputLabel>
-                <OutlinedInput {...field} label="Email address" type="email" />
-                {errors.email ? <FormHelperText>{errors.email.message}</FormHelperText> : null}
+                <OutlinedInput {...field} label="Email address" type="email" required />
+                {errors.email && <FormHelperText>{errors.email.message}</FormHelperText>}
               </FormControl>
             )}
           />
           <Controller
             control={control}
             name="password"
+            rules={{ required: 'Password is required' }}
             render={({ field }) => (
-              <FormControl error={Boolean(errors.password)}>
+              <FormControl error={Boolean(errors.password)} required>
                 <InputLabel>Password</InputLabel>
                 <OutlinedInput
                   {...field}
@@ -101,8 +125,9 @@ export function SignInForm(): React.JSX.Element {
                   }
                   label="Password"
                   type={showPassword ? 'text' : 'password'}
+                  required
                 />
-                {errors.password ? <FormHelperText>{errors.password.message}</FormHelperText> : null}
+                {errors.password && <FormHelperText>{errors.password.message}</FormHelperText>}
               </FormControl>
             )}
           />
@@ -113,7 +138,9 @@ export function SignInForm(): React.JSX.Element {
             Forgot password?
             </Link></Box>
           </div>
-          {errors.root ? <Alert color="error">{errors.root.message}</Alert> : null}
+          {errors.root && (
+            <Alert severity="error">{errors.root.message}</Alert>
+          )}
           <Button disabled={isPending} type="submit" variant="contained">
             Sign in
           </Button>

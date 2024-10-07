@@ -21,6 +21,8 @@ import { z as zod } from 'zod';
 import { paths } from '@/paths';
 import { useUser } from '@/hooks/use-user';
 import { Select, MenuItem } from '@mui/material';
+import { countries } from '@/utilities/countries';
+// Remove the import for countries as it's causing an error
 
 const schema = zod.object({
   firstName: zod.string().min(1, { message: 'First name is required' }),
@@ -170,9 +172,15 @@ export function SignUpForm(): React.JSX.Element {
               control={control}
               name="country"
               render={({ field }) => (
-                <FormControl error={Boolean(errors.country)}>
+                <FormControl error={Boolean(errors.country)} fullWidth>
                   <InputLabel>Country</InputLabel>
-                  <OutlinedInput {...field} label="Country" />
+                  <Select {...field} label="Country">
+                    {countries.map((country: { code: string; name: string }) => (
+                      <MenuItem key={country.code} value={country.code}>
+                        {country.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
                   {errors.country ? <FormHelperText>{errors.country.message}</FormHelperText> : null}
                 </FormControl>
               )}
